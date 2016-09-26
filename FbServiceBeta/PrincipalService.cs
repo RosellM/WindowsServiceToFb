@@ -18,24 +18,14 @@ namespace FbServiceBeta
             var client = new WebClient();
             string accessToken = service.requestingToken(client);
             var facebook_client = new FacebookClient(accessToken);
-            dynamic posts = service.requestingFacebook(facebook_client, "BorrachosVIP");
-            int PostLenght = posts.data.Count;
-            String message = "its empty";
-            for (int post_iterator = 0; post_iterator < PostLenght; post_iterator++)
+            dynamic posts = service.requestingFacebook(facebook_client, "MarvelUniverseExtended");
+            DataManagement db = new DataManagement();        
+            if (db.insert(posts) !=-1)
             {
-                String comment = "its empty";
-
-                message = posts.data[post_iterator].message;
-                Console.WriteLine(" # publicacion " + message);
-
-                int num_comments = posts.data[post_iterator].comments.data.Count;
-                for (int comment_iterador = 0; comment_iterador < num_comments; comment_iterador++) 
-                {
-                    comment = posts.data[post_iterator].comments.data[comment_iterador].message;
-                    Console.WriteLine(" - Comentario "  + comment);
-                }
-              
+               Console.WriteLine("Insercion exitosa!");
             }
+            
+            
             Console.ReadKey();
 
         }
