@@ -16,8 +16,10 @@ namespace FbServiceBeta
 
         public String requestingToken(WebClient client) 
         {
+            Console.WriteLine("Autenticando...");
             string oauthUrl = string.Format("https://graph.facebook.com/oauth/access_token?type=client_cred&client_id={0}&client_secret={1}", app_id, app_secret);
             string accessToken = client.DownloadString(oauthUrl).Split('=')[1];
+            Console.WriteLine("Token ready!");
             return accessToken;
       
         }
@@ -25,6 +27,16 @@ namespace FbServiceBeta
         public dynamic requestingFacebook(FacebookClient facebook_client,string search)
         {
             string search_final = String.Format("{0}/posts?fields=message,comments", search);
+            dynamic posts = facebook_client.Get(search_final);
+            return posts;
+        }
+
+        public dynamic requestingCoincidence(FacebookClient facebook_client, string search)
+        {
+            //search?type=topic&q=clinton&fields=id%2Cname%2Cpage
+            string search_final = 
+                String.Format("/search?type=topic&q={0}&fields=id",search);
+           
             dynamic posts = facebook_client.Get(search_final);
             return posts;
         }

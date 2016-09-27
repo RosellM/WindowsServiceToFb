@@ -8,3 +8,15 @@ C:\Users\ROSEL MENDEZ\Documents\Visual Studio 2013\Projects\FbServiceBeta\FbServ
 C:\Users\ROSEL MENDEZ\Documents\Visual Studio 2013\Projects\FbServiceBeta\FbServiceBeta\obj\Debug\FbServiceBeta.pdb
 C:\Users\ROSEL MENDEZ\Documents\Visual Studio 2013\Projects\FbServiceBeta\FbServiceBeta\bin\Debug\Newtonsoft.Json.dll
 C:\Users\ROSEL MENDEZ\Documents\Visual Studio 2013\Projects\FbServiceBeta\FbServiceBeta\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Ricardo\Documents\Visual Studio 2013\Projects\WindowsServiceToFb\FbServiceBeta\bin\Debug\FbServiceBeta.exe.config
+C:\Users\Ricardo\Documents\Visual Studio 2013\Projects\WindowsServiceToFb\FbServiceBeta\obj\Debug\FbServiceBeta.exe
+C:\Users\Ricardo\Documents\Visual Studio 2013\Projects\WindowsServiceToFb\FbServiceBeta\obj\Debug\FbServiceBeta.pdb
+C:\Users\Ricardo\Documents\Visual Studio 2013\Projects\WindowsServiceToFb\FbServiceBeta\bin\Debug\FbServiceBeta.exe
+C:\Users\Ricardo\Documents\Visual Studio 2013\Projects\WindowsServiceToFb\FbServiceBeta\bin\Debug\FbServiceBeta.pdb
+C:\Users\Ricardo\Documents\Visual Studio 2013\Projects\WindowsServiceToFb\FbServiceBeta\bin\Debug\Facebook.dll
+C:\Users\Ricardo\Documents\Visual Studio 2013\Projects\WindowsServiceToFb\FbServiceBeta\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Ricardo\Documents\Visual Studio 2013\Projects\WindowsServiceToFb\FbServiceBeta\bin\Debug\Facebook.xml
+C:\Users\Ricardo\Documents\Visual Studio 2013\Projects\WindowsServiceToFb\FbServiceBeta\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Ricardo\Documents\Visual Studio 2013\Projects\WindowsServiceToFb\FbServiceBeta\obj\Debug\FbServiceBeta.csprojResolveAssemblyReference.cache
+C:\Users\Ricardo\Documents\Visual Studio 2013\Projects\WindowsServiceToFb\FbServiceBeta\bin\Debug\Dapper.dll
+C:\Users\Ricardo\Documents\Visual Studio 2013\Projects\WindowsServiceToFb\FbServiceBeta\bin\Debug\Dapper.xml
