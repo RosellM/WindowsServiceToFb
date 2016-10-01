@@ -15,13 +15,14 @@ using ServiceTest.Data.Tables;
 namespace ServiceTest.Data
 {
 
-    public class SM_MSSQL : SocialMediaDapper
+    public class SM_Facebook
+        : SocialMediaDapper
     {
         private IDbConnection conn;
         private Boolean production;
         public String error = "";
-
-        public SM_MSSQL()
+        int FACEBOOK = 1;
+        public SM_Facebook()
         {
             String conf_str_conn = "local_master";
             try
@@ -72,24 +73,26 @@ namespace ServiceTest.Data
             if (this.conn != null && this.conn.State == ConnectionState.Open)
             {
                 DynamicParameters param = new DynamicParameters();
-                param.Add("@text", post.text);
+                param.Add("@IdPostCatalog", post.IdPostCatalog);
+                param.Add("@text", post.text);            
                 param.Add("@object", post.@object);
                 param.Add("@date", post.date);
-                param.Add("@source", post.source);
+                param.Add("@IdCatalog", FACEBOOK);
                 param.Add("@sentiment", post.sentiment);
                 param.Add("@useraccount", post.useraccount);
                 param.Add("@usernamecomplete", post.usernamecomplete);
                 param.Add("@location", post.location);
                 param.Add("@latitude", post.latitude);
                 param.Add("@longitude", post.longitude);
-                param.Add("@idPost", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                param.Add("@IdPost", dbType: DbType.Int32, direction: ParameterDirection.Output);
                 try
                 {
                     this.conn.Execute("addPostProc", param, commandType: CommandType.StoredProcedure);
-                    id = param.Get<Int32>("idPost");
+                    id = param.Get<Int32>("IdPost");
                     if (id <= 0)
                     {
                         id = -1;
+                        
                     }
                 }
                 catch (Exception ex)
@@ -126,6 +129,53 @@ namespace ServiceTest.Data
                 }
             }
             return id;
+        }
+
+        public dynamic getSingle(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public dynamic getAll()
+        {
+           
+            try {
+                if (this.conn != null && this.conn.State == ConnectionState.Open)
+                {
+                    return conn.Query<ServiceTest.Data.Tables.Object>("Select * From filter where IdCatalog=" + FACEBOOK).ToList();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
+
+        public dynamic getAllTopics()
+        {
+
+
+            try
+            {
+                if (this.conn != null && this.conn.State == ConnectionState.Open)
+                {
+                    return conn.Query<ServiceTest.Data.Tables.Topic>("Select * From topic").ToList();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+
         }
     }
 }

@@ -14,5 +14,7 @@ namespace ServiceTest.Data.Interface
         void CloseConnection();
         int AddPost(Post post);
         int AddFollowers(Followers followers);
+        dynamic getSingle(int id);
+        dynamic getAll();
     }
 }

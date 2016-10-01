@@ -24,23 +24,19 @@ namespace FbServiceBeta
       
         }
 
-        public dynamic requestingFacebook(FacebookClient facebook_client,string search)
+        public dynamic requestingFacebook(FacebookClient facebook_client,string search,String nextNode=null)
         {
-            string search_final = String.Format("{0}/posts?fields=message,comments", search);
-            dynamic posts = facebook_client.Get(search_final);
-            return posts;
+            if (nextNode == null)
+            {
+                string search_final = String.Format("{0}/posts?fields=message,comments", search);
+                dynamic posts = facebook_client.Get(search_final);
+                return posts;
+            }
+            else {
+
+                dynamic posts = facebook_client.Get(nextNode);
+                return posts;
+            }            
         }
-
-        public dynamic requestingCoincidence(FacebookClient facebook_client, string search)
-        {
-            //search?type=topic&q=clinton&fields=id%2Cname%2Cpage
-            string search_final = 
-                String.Format("/search?type=topic&q={0}&fields=id",search);
-           
-            dynamic posts = facebook_client.Get(search_final);
-            return posts;
-        }
-
-
     }
 }

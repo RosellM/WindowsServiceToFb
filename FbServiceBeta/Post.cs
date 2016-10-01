@@ -10,8 +10,9 @@ namespace ServiceTest.Data.Tables
     {
         public String text { get; set; }
         public String @object { get; set; }
+        public String IdPostCatalog { get; set; }
         public DateTime date { get; set; }
-        public String source { get; set; }
+        public int IdCatalog { get; set; }
         public String sentiment { get; set; }
         public String useraccount { get; set; }
         public String usernamecomplete { get; set; }

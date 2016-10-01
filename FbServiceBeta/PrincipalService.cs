@@ -15,22 +15,61 @@ namespace FbServiceBeta
     {
         static void Main(string[] args)
         {
+            int NUM_OF_PAGES = 5;
 
             ServiceHelper service = new ServiceHelper();
-            SM_MSSQL sm = new SM_MSSQL();
+            SM_Facebook sm = new SM_Facebook();
             Console.WriteLine("Iniciando...");
             var client = new WebClient();
             string accessToken = service.requestingToken(client);
             var facebook_client = new FacebookClient(accessToken);
-            dynamic posts = service.requestingFacebook(facebook_client, "AristeguiOnline");
-            //dynamic coincidendes = service.requestingCoincidence(facebook_client,"chiapas");
-            DataManagement dm = new DataManagement();
-            List<Post> posts_formated = dm.buildListOfCoincidences(posts, "cnte test arigtegi");
-            foreach (Post p in posts_formated)
+            var PageList = sm.getAll();
+            if (PageList.Count > 0)
             {
-                sm.AddPost(p);
+                List<ServiceTest.Data.Tables.Object> pages = (List <ServiceTest.Data.Tables.Object>)PageList;
+                DataManagement dm = new DataManagement();
+                foreach (ServiceTest.Data.Tables.Object page in pages)
+                {
+                    dynamic posts = service.requestingFacebook(facebook_client, page.name);                    
+                    List<Post> posts_formated = dm.buildListOfCoincidences(posts);                
+                    foreach (Post p in posts_formated)
+                    {
+                        sm.AddPost(p);
+                    }
+                    Console.WriteLine("Insert succesfull");
+                }
+               
+                for (int i = 0; i  < NUM_OF_PAGES ; i ++)
+                {
+                    Console.WriteLine("node "+ i );
+                
+                    dm.asingValues();
+                    dm.clearAuxInfo();
+                    foreach (String nextPage in dm.PostChilds )
+                    {
+                        dynamic posts = service.requestingFacebook(facebook_client, null, nextPage);
+                        List<Post> posts_formated = dm.buildListOfCoincidences(posts);
+                        foreach (Post p in posts_formated)
+                        {
+                            sm.AddPost(p);
+                            Console.WriteLine("node post ");
+                        }
+                    }
+                    foreach (String nextPage in dm.CommentsChilds)
+                    {
+                        dynamic posts = service.requestingFacebook(facebook_client, null, nextPage);
+                        List<Post> posts_formated = dm.buildListOfCoincidences(posts);
+                        foreach (Post p in posts_formated)
+                        {
+                            sm.AddPost(p);
+                            Console.WriteLine("node comments ");
+                        }
+                    }
+                    
+                }
+
             }
-            Console.WriteLine("Insert succesfull");
+            Console.WriteLine("Insertion finished");
             Console.ReadKey();
 
         }
